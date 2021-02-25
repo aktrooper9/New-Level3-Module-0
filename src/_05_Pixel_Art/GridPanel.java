@@ -35,12 +35,13 @@ Pixel[][] pixels;
         setPreferredSize(new Dimension(windowWidth, windowHeight));
 
         // 2. Initialize the pixel array using the rows and cols variables.
-pixels [rows][cols]=new Pixel(pixelHeight, pixelWidth);
+        
+pixels=new Pixel[rows][cols];
 
         // 3. Iterate through the array and initialize each element to a new pixel.
 for(int row = 0; row<pixels.length; row++) {
 	for(int col =0; col < pixels[row].length;col++) {
-		pixels [rows][cols]=new Pixel(pixelHeight, pixelWidth);
+		pixels [row][col]=new Pixel(col*pixelWidth,row*pixelHeight );
 
 }
 }
@@ -53,9 +54,13 @@ for(int row = 0; row<pixels.length; row++) {
     public void clickPixel(int mouseX, int mouseY) {
         // 5. Use the mouseX and mouseY variables to change the color
         //    of the pixel that was clicked. *HINT* Use the pixel's dimensions.
-    	if(mouseX==pixelWidth&&mouseY==pixelHeight) {
-    		setColor(Color.BLUE);
-    	}
+    	
+    	int row = mouseY/pixelHeight;
+    	int col = mouseX/pixelWidth;
+    	
+    	pixels[row][col].color=color;
+    		
+    	
     }
 
     @Override
@@ -65,7 +70,13 @@ for(int row = 0; row<pixels.length; row++) {
         //    Then, use drawRect to add a grid pattern to your display.
     	for(int row = 0; row<pixels.length; row++) {
     		for(int col =0; col < pixels[row].length;col++) {
+    			Pixel pixel = pixels[row][col];
     			
+    			g.setColor(pixel.color);
+    			
+    	g.fillRect(pixel.x,pixel.y , pixelWidth, pixelHeight);
+    	g.setColor(Color.BLACK);
+		g.drawRect(pixel.x,pixel.y , pixelWidth, pixelHeight);
 
     	}
     	}
