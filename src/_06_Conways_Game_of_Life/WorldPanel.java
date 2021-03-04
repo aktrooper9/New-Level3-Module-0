@@ -57,7 +57,7 @@ for(int row = 0; row<cells.length; row++) {
     		    }
     		}
     	}
-        repaint();
+     //   repaint();
     }
 
     public void clearCells() {
@@ -69,7 +69,7 @@ for(int row = 0; row<cells.length; row++) {
     		    
     		}
     	}
-        repaint();
+       // repaint();
     }
 
     public void startAnimation() {
@@ -87,23 +87,23 @@ for(int row = 0; row<cells.length; row++) {
     @Override
     public void paintComponent(Graphics g) {
         // 6. Iterate through the cells and draw them all
-
-    	for(int row = 0; row<cells.length; row++) {
+for(int row = 0; row<cells.length; row++) {
     		for(int col =0; col < cells[row].length;col++) {
     		   cells[row][col].draw(g);
     		}
     	}
+g.setColor(Color.BLACK);
+g.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
 
         // Draw the perimeter of the grid
-        g.setColor(Color.BLACK);
-        g.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
+//       repaint();
     }
 
     // Advances world one step
     public void step() {
         // 7. iterate through cells and fill in the livingNeighbors array
         //    using the getLivingNeighbors method.
-        int[][] livingNeighbors = new int[cellsPerRow][cellsPerRow];
+        int[][] livingNeighbors = new int[cellSize][cellSize];
         for(int row = 0; row<livingNeighbors.length; row++) {
     		for(int col =0; col < livingNeighbors[row].length;col++) {
     			livingNeighbors[row][col]=getLivingNeighbors(cells,row,col);
@@ -116,7 +116,7 @@ for(int row = 0; row<cells.length; row++) {
     		  cells[row][col].liveOrDie(livingNeighbors[row][col]);
     		}
     	}
-        repaint();
+      //  repaint();
     }
 
     // The method below gets the number of living neighbors around a
@@ -131,25 +131,25 @@ for(int row = 0; row<cells.length; row++) {
             if(cells[cellRow - 1][cellCol].isAlive) livingNeighbors++;
         }
         
-        if(cellRow != cellsPerRow - 1) {
+        if(cellRow != cellSize - 1) {
             if(cells[cellRow + 1][cellCol].isAlive) livingNeighbors++;
         }
         if(cellCol != 0) {
             if(cells[cellRow][cellCol - 1].isAlive) livingNeighbors++;
         }
-        if(cellCol != cellsPerRow - 1) {
+        if(cellCol != cellSize - 1) {
             if(cells[cellRow][cellCol + 1].isAlive) livingNeighbors++;
         }
         if(cellRow != 0 && cellCol != 0) {
             if(cells[cellRow - 1][cellCol - 1].isAlive) livingNeighbors++;
         }
-        if(cellRow != cellsPerRow - 1 && cellCol != cellsPerRow - 1) {
+        if(cellRow != cellSize- 1 && cellCol != cellSize - 1) {
             if(cells[cellRow + 1][cellCol + 1].isAlive) livingNeighbors++;
         }
-        if(cellRow != 0 && cellCol != cellsPerRow - 1) {
+        if(cellRow != 0 && cellCol != cellSize - 1) {
             if(cells[cellRow - 1][cellCol + 1].isAlive) livingNeighbors++;
         }
-        if(cellRow != cellsPerRow - 1 && cellCol != 0) {
+        if(cellRow != cellSize - 1 && cellCol != 0) {
             if(cells[cellRow + 1][cellCol - 1].isAlive) livingNeighbors++;
         }
         
@@ -180,13 +180,16 @@ for(int row = 0; row<cells.length; row++) {
         //    cellSize, meaning it's possible to click inside of a cell. You
         //    have to determine the cell that was clicked from the pixel
         //    location and toggle the 'isAlive' variable for that cell.
-e.getX();
-e.getY();
+int mouseY=e.getY();
 
-
+int mouseX=e.getX();
+System.out.println(mouseX +" "+mouseY);
+if(mouseX<100&&mouseY<100) {
+	       	    	cells[mouseY/10][mouseX/10].isAlive =!cells[mouseY/10][mouseX/10].isAlive;
+}
         repaint();
     }
-
+    
     @Override
     public void mouseReleased(MouseEvent e) {
         // TODO Auto-generated method stub

@@ -48,12 +48,20 @@
 
 package _07_The_Wrong_Way_Cow;
 
+import _06_Conways_Game_of_Life.Cell;
+
 public class TheWrongWayCow {
 
-    public static int[] findWrongWayCow(final char[][] field) {
+    public static char findWrongWayCow(final char[][] field) {
         // Fill in the code to return the [col, row] coordinate position of the
         // head (letter 'c') of the wrong way cow!
-        
-        return null;
+    	for(int row = 0; row<field.length; row++) {
+    		for(int col =0; col < field[row].length;col++) {
+    			if(field[row][col]=='c') {
+    				return field[row][col];
+    			}
+    		}
+    	}
+    //    return null;
     }
 }
