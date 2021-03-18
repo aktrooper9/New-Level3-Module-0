@@ -46,29 +46,83 @@
  * .c.....
 */
 
+// Fill in the code to return the [col, row] coordinate position of the
+// head (letter 'c') of the wrong way cow!
+//int[]ints = new int [2];
+//int direction;
+//  	for(int row = 0; row<field.length; row++) {
+//		for(int col =0; col < field[row].length;col++) {
+//		chara+=1;
+//	if(col==3) {
+//	chara=0;
+//if(field[row][col]=='c') {
+//if(field[row-1][col]=='c')
+//ints[0]=col;
+//ints[1]=row;
+//  				return ints;
+//		}
+
+//			}
+//	}
+//	}
+//  return null;
+
 package _07_The_Wrong_Way_Cow;
 
 import _06_Conways_Game_of_Life.Cell;
 
 public class TheWrongWayCow {
-	
-    public static int[] findWrongWayCow( final char[][] field) {
-        // Fill in the code to return the [col, row] coordinate position of the
-        // head (letter 'c') of the wrong way cow!
-    	int[]ints = new int [2];
-int direction;
-    	for(int row = 0; row<field.length; row++) {
-    		for(int col =0; col < field[row].length;col++) {
-    			if(field[row][col]=='c') {
-    				if(field[row-1][col]=='c')
-ints[0]=col;
-ints[1]=row;
-    				return ints;
-    			
-    			}
-    		}
-    	}
-        return null;
-		
-    }
+	static int chara = 0;
+	static int rightwaycow;
+	static int waycowisfacingdown = 0;
+	static int waycowisfacingup = 0;
+	static int waycowisfacingleft = 0;
+	static int waycowisfacingright = 0;
+
+	public static int[] findWrongWayCow(final char[][] field) {
+		int[] ints = new int[2];
+		int direction;
+		for (int row = 0; row < field.length; row++) {
+			for (int col = 0; col < field[row].length; col++) {
+
+				if (field[row][col] == 'c') {
+					if (row >= 2) {
+						if (field[row - 1][col] == 'o') { // looking up
+							if (field[row - 2][col] == 'w') {
+								waycowisfacingup += 1;
+							}
+						}
+					} else if (field[row][col - 1] == 'o') { // looking right
+						if (field[row][col - 2] == 'w') {
+							waycowisfacingleft += 1;
+
+						}
+					}
+				if(col <= field.length - 3) {
+					else if (field[row][col + 1] == 'o') { // looking right
+						if (field[row][col + 2] == 'w') {
+							waycowisfacingright += 1;
+						}
+					}
+				}	
+					
+					
+				if (row <= field.length - 3) { // looking down
+						if (field[row + 1][col] == 'o') {
+							if (field[row + 2][col] == 'w') {
+								waycowisfacingdown += 1;
+							}
+						}
+
+					}
+
+				}
+
+			}
+
+		}
+		System.out.println("up " + waycowisfacingup + "left " + waycowisfacingleft + "down " + waycowisfacingdown
+				+ "right " + waycowisfacingright);
+		return ints;
+	}
 }
