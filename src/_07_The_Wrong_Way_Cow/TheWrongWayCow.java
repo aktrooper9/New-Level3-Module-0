@@ -82,32 +82,39 @@ public class TheWrongWayCow {
 	public static int[] findWrongWayCow(final char[][] field) {
 		int[] ints = new int[2];
 		int direction;
+		System.out.println(field.length);
+		System.out.println(field[0].length);
 		for (int row = 0; row < field.length; row++) {
 			for (int col = 0; col < field[row].length; col++) {
-
-				if (field[row][col] == 'c') {
+System.out.print(field[row][col]);
+			if (field[row][col] == 'c') {
+				System.out.println(row+" "+col);
 					if (row >= 2) {
 						if (field[row - 1][col] == 'o') { // looking up
 							if (field[row - 2][col] == 'w') {
 								waycowisfacingup += 1;
 							}
 						}
-					} else if (field[row][col - 1] == 'o') { // looking right
-						if (field[row][col - 2] == 'w') {
-							waycowisfacingleft += 1;
+					}
+					if (col >= 2) {  
+						if (field[row][col - 1] == 'o') { // looking left
+							if (field[row][col - 2] == 'w') {
+								waycowisfacingleft += 1;
 
+							}
 						}
 					}
-				if(col <= field.length - 3) {
-					else if (field[row][col + 1] == 'o') { // looking right
-						if (field[row][col + 2] == 'w') {
+					
+			if (col <= field[0].length - 2) {
+
+						if (field[row][col + 1] == 'o') { // looking right
+							if (field[row][col + 2] == 'w') {
 							waycowisfacingright += 1;
 						}
+						}
 					}
-				}	
-					
-					
-				if (row <= field.length - 3) { // looking down
+
+					if (row <= field[0].length - 2) { // looking down
 						if (field[row + 1][col] == 'o') {
 							if (field[row + 2][col] == 'w') {
 								waycowisfacingdown += 1;
@@ -123,6 +130,32 @@ public class TheWrongWayCow {
 		}
 		System.out.println("up " + waycowisfacingup + "left " + waycowisfacingleft + "down " + waycowisfacingdown
 				+ "right " + waycowisfacingright);
+		if(waycowisfacingup==1) {
+			
+		}
+		else if(waycowisfacingleft==1) {
+			
+		}
+		else if(waycowisfacingdown==1) {
+			
+		}
+		else {
+			
+		}
+		
+		
+//		if(waycowisfacingup>waycowisfacingdown&&waycowisfacingup>waycowisfacingleft&&waycowisfacingup>waycowisfacingright) {
+//			
+//		}
+//		else if (waycowisfacingleft>waycowisfacingdown&&waycowisfacingleft>waycowisfacingup&&waycowisfacingleft>waycowisfacingright) {
+//			
+//		}
+//		else if(waycowisfacingright>waycowisfacingdown&&waycowisfacingright>waycowisfacingup&&waycowisfacingright>waycowisfacingleft) {
+//			
+//		}
+//		else {
+//			
+//		}
 		return ints;
 	}
 }
