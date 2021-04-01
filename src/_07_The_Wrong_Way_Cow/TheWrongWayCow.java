@@ -72,8 +72,7 @@ package _07_The_Wrong_Way_Cow;
 import _06_Conways_Game_of_Life.Cell;
 
 public class TheWrongWayCow {
-	static int chara = 0;
-	static int rightwaycow;
+
 	static int waycowisfacingdown = 0;
 	static int waycowisfacingup = 0;
 	static int waycowisfacingleft = 0;
@@ -81,43 +80,59 @@ public class TheWrongWayCow {
 
 	public static int[] findWrongWayCow(final char[][] field) {
 		int[] ints = new int[2];
+		int[] up = new int[2];
+		int[] down = new int[2];
+		int[] right = new int[2];
+		int[] left = new int[2];
+
+		waycowisfacingdown = 0;
+		waycowisfacingup = 0;
+		waycowisfacingleft = 0;
+		waycowisfacingright = 0;
 		int direction;
 		System.out.println(field.length);
 		System.out.println(field[0].length);
 		for (int row = 0; row < field.length; row++) {
 			for (int col = 0; col < field[row].length; col++) {
-System.out.print(field[row][col]);
-			if (field[row][col] == 'c') {
-				System.out.println(row+" "+col);
+				System.out.print(field[row][col]);
+				if (field[row][col] == 'c') {
+					System.out.println(row + " " + col);
 					if (row >= 2) {
 						if (field[row - 1][col] == 'o') { // looking up
 							if (field[row - 2][col] == 'w') {
 								waycowisfacingup += 1;
+								up[0] = col;
+								up[1] = row;
 							}
 						}
 					}
-					if (col >= 2) {  
+					if (col >= 2) {
 						if (field[row][col - 1] == 'o') { // looking left
 							if (field[row][col - 2] == 'w') {
 								waycowisfacingleft += 1;
-
+								left[0] = col;
+								left[1] = row;
 							}
 						}
 					}
-					
-			if (col <= field[0].length - 2) {
+
+					if (col <= field[0].length - 2) {
 
 						if (field[row][col + 1] == 'o') { // looking right
 							if (field[row][col + 2] == 'w') {
-							waycowisfacingright += 1;
-						}
+								waycowisfacingright += 1;
+								right[0] = col;
+								right[1] = row;
+							}
 						}
 					}
 
-					if (row <= field[0].length - 2) { // looking down
+					if (row < field.length - 2) { // looking down
 						if (field[row + 1][col] == 'o') {
 							if (field[row + 2][col] == 'w') {
 								waycowisfacingdown += 1;
+								down[0] = col;
+								down[1] = row;
 							}
 						}
 
@@ -130,20 +145,16 @@ System.out.print(field[row][col]);
 		}
 		System.out.println("up " + waycowisfacingup + "left " + waycowisfacingleft + "down " + waycowisfacingdown
 				+ "right " + waycowisfacingright);
-		if(waycowisfacingup==1) {
-			
+		if (waycowisfacingup == 1) {
+			return up;
+		} else if (waycowisfacingleft == 1) {
+			return left;
+		} else if (waycowisfacingdown == 1) {
+			return down;
+		} else {
+			return right;
 		}
-		else if(waycowisfacingleft==1) {
-			
-		}
-		else if(waycowisfacingdown==1) {
-			
-		}
-		else {
-			
-		}
-		
-		
+
 //		if(waycowisfacingup>waycowisfacingdown&&waycowisfacingup>waycowisfacingleft&&waycowisfacingup>waycowisfacingright) {
 //			
 //		}
@@ -156,6 +167,6 @@ System.out.print(field[row][col]);
 //		else {
 //			
 //		}
-		return ints;
+
 	}
 }

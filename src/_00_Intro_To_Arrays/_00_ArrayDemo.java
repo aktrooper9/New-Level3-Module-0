@@ -39,6 +39,9 @@ public class _00_ArrayDemo {
             System.out.println("int: " + i);
         }
         System.out.println("\n");
-        
-    }
+        int[][] matrix = {{0, 1, 2}, {3}, {4, 5}};
+        int[][] mat3 = new int[3][3];
+
+
+     }
 }
